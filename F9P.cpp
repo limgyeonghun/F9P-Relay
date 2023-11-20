@@ -166,10 +166,11 @@ int F9P::callback(GPSCallbackType type, void *data1, int data2) {
         case GPSCallbackType::surveyInStatus: {
             SurveyInStatus *status = (SurveyInStatus *) data1;
 //            cout << "Position: " << status->latitude << status->longitude << status->altitude;
-            std::cout << "Survey-in duration: " << status->duration << "s cur accuracy: " << std::setprecision(2)
-                      << static_cast<float>(status->mean_accuracy) / 1000.0f << "m valid: "
-                      << static_cast<int>(status->flags & 1) << " active: "
-                      << static_cast<int>((status->flags >> 1) & 1) << std::endl;
+            std::cout << "Survey-in duration: " << status->duration
+                      << "s cur accuracy: " << std::fixed << std::setprecision(2)
+                      << static_cast<float>(status->mean_accuracy) / 1000.0f
+                      << "m valid: " << static_cast<int>(status->flags & 1)
+                      << " active: " << static_cast<int>((status->flags >> 1) & 1) << "\n";
         }
             break;
 
@@ -187,3 +188,40 @@ void F9P::publishGPSPosition() {
 void F9P::publishGPSSatellite() {
 //    printf("publishGPSSatellite\n");
 }
+/*
+ * RTCM bandwidth: 1.01 kB/s
+ret : 42len : 39 Current time: 1695790603834913
+ret : 197len : 194 Current time: 1695790604785227
+ret : 197len : 194 Current time: 1695790604785302
+ret : 197len : 194 Current time: 1695790604785914
+ret : 197len : 194 Current time: 1695790604785981
+ret : 193len : 190 Current time: 1695790604786252
+ret : 185len : 182 Current time: 1695790604787820
+ret : 185len : 182 Current time: 1695790604787865
+ret : 27len : 24 Current time: 1695790604787890
+RTCM bandwidth: 0.53 kB/s
+ret : 197len : 194 Current time: 1695790605788374
+ret : 197len : 194 Current time: 1695790605788421
+ret : 197len : 194 Current time: 1695790605789258
+ret : 197len : 194 Current time: 1695790605789313
+ret : 193len : 190 Current time: 1695790605789922
+ret : 184len : 181 Current time: 1695790605790668
+ret : 184len : 181 Current time: 1695790605790717
+ret : 27len : 24 Current time: 1695790605790745
+ret : 197len : 194 Current time: 1695790606788222
+ret : 197len : 194 Current time: 1695790606788291
+ret : 197len : 194 Current time: 1695790606789303
+ret : 197len : 194 Current time: 1695790606789378
+RTCM bandwidth: 1.21 kB/s
+ret : 193len : 190 Current time: 1695790606790131
+ret : 175len : 172 Current time: 1695790606790862
+ret : 175len : 172 Current time: 1695790606790930
+ret : 27len : 24 Current time: 1695790606790969
+ret : 197len : 194 Current time: 1695790607787849
+ret : 197len : 194 Current time: 1695790607787911
+ret : 197len : 194 Current time: 1695790607789049
+ret : 197len : 194 Current time: 1695790607789264
+ret : 193len : 190 Current time: 1695790607789311
+ret : 175len : 172 Current time: 1695790607789917
+ret : 175len : 172 Current time: 1695790607789965
+ */
