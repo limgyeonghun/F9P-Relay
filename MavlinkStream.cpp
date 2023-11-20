@@ -142,7 +142,7 @@ int MavlinkStream::sendToLora(const mavlink_message_t &msg) {
     auto usec = std::chrono::duration_cast<std::chrono::microseconds>(now.time_since_epoch()).count();
 
     // 시간을 문자열로 변환하여 출력
-    std::cout << "ret : " << ret << "len : "<< len <<" Current time: " << usec << "\n";
+//    std::cout << "ret : " << ret << "len : "<< len <<" Current time: " << usec << "\n";
     if (ret < 0) {
         perror("Failed to write to serial port\n");
     }

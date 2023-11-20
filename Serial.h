@@ -42,7 +42,7 @@ namespace WSerial {
 
         int error() const { return _lastError; }
 
-        void clearError() { _lastError = 0; }
+        void clearError() { _lastError = NoError; }
 
         string errorString() const;
 

@@ -28,4 +28,11 @@ add_executable(f9p_relay
         F9P.cpp
 )
 
-target_link_libraries(f9p_relay gps mavlink serial mavlink_stream)
+target_link_libraries(f9p_relay
+        gps
+        mavlink
+        serial
+        mavlink_stream
+        gtest
+        gtest_main
+)
