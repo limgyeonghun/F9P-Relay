@@ -1,12 +1,33 @@
 #include "F9P.hpp"
 
 int main(int argc, char **argv) {
-    try {
-        string udp_ip = "10.42.0.255";
-        int udp_port = 9750;
-        string lora_device = "/dev/ttyUSB0";
-        string f9p_device = "/dev/ttyACM0";
+    string udp_ip = "10.42.0.255";
+    int udp_port = 9750;
+    string lora_device = "/dev/ttyUSB0";
+    string f9p_device = "/dev/ttyACM0";
 
+    int option;
+    while ((option = getopt(argc, argv, "i:p:l:g:")) != -1) {
+        switch (option) {
+            case 'i':
+                udp_ip = optarg;
+                break;
+            case 'p':
+                udp_port = std::stoi(optarg);
+                break;
+            case 'l':
+                lora_device = optarg;
+                break;
+            case 'g':
+                f9p_device = optarg;
+                break;
+            case '?': // Unrecognized option
+                std::cerr << "Usage: " << argv[0] << " [-i ip] [-p port] [-l lora_device] [-g f9p_device]" << std::endl;
+                return 1;
+        }
+    }
+
+    try {
         MavlinkStream mavlinkStream(udp_ip, udp_port, lora_device);
 
         F9P f9p(f9p_device, SURVEY_ACC_METER, SURVEY_DURATION_SECS, false, true, &mavlinkStream);
