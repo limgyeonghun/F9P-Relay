@@ -18,7 +18,7 @@
 
 // You may need to include or define vehicle_gps_position and satellite_info
 // based on your project structure.
- #include "vehicle_gps_position.h"
+ #include "sensor_gps.h"
  #include "satellite_info.h"
  #include "sensor_gnss_relative.h"
 
