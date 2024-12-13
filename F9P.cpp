@@ -44,14 +44,13 @@ void F9P::run() {
     if (_f9p) delete _f9p;
 
     _f9p = new WSerial::Serial();
-    _f9p = new WSerial::Serial();
+
     _f9p->setPortName(_device);
     if (!_f9p->open()) {
         int retries = 60;
         // Give the device some time to come up. In some cases the device is not
         // immediately accessible right after startup for some reason. This can take 10-20s.
         while (retries-- > 0 && _f9p->error() == WSerial::Serial::PermissionError) { // permission error
-            cout << "Cannot open device... retrying\n";
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
             if (_f9p->open()) {
@@ -103,7 +102,7 @@ void F9P::run() {
 
             while (!_requestStop && numTries < 3) {
                 int helperRet = gpsDriver->receive(GPS_RECEIVE_TIMEOUT);
-
+                
                 if (helperRet > 0) {
                     numTries = 0;
 
@@ -226,7 +225,7 @@ void F9P::publishGPSSatellite() {
 //    printf("publishGPSSatellite\n");
 }
 
-void F9P::SendDummyRTCM() {
+void F9P::SendDummyRTCM() { 
     const size_t len = 150;
     uint8_t dummyData[len];
 
@@ -241,8 +240,9 @@ void F9P::sendRTCM() {
     while (!_requestStop) {
         std::unique_lock<std::mutex> lock(_queueMutex);
         _cv.wait(lock, [this]{ return !_messageQueue.empty() || _requestStop; });
-//        std::cout << "_messageQueue(" << _messageQueue.size() << ")\n";
+	
         while (!_messageQueue.empty()) {
+	std::cout << "_messageQueue(" << _messageQueue.size() << ")\n";
             auto message = _messageQueue.front();
             _messageQueue.pop();
             lock.unlock();

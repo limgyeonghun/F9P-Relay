@@ -35,7 +35,5 @@ target_link_libraries(f9p_relay
         mavlink
         serial
         mavlink_stream
-        gtest
-        gtest_main
         Threads::Threads
 )

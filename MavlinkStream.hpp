@@ -6,9 +6,9 @@
 #include "Serial.h"
 #include "include/mavlink/common/mavlink.h"
 
-#define LORA_PACKET_MAX 240
-#define LORA_PAYLOAD 237
-#define LORA_CHANNEL 72
+#define LORA_PACKET_MAX 200
+#define LORA_PAYLOAD 197
+#define LORA_CHANNEL 80
 
 using namespace std;
 class ElapsedTimer {
